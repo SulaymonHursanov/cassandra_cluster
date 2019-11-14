@@ -1,0 +1,54 @@
+version: '3'
+services:
+  cassandra_first:
+    build:
+      context: .
+      args:
+        - node1=${NODE1}
+        - node2=${NODE2}
+        - node3=${NODE3}
+      dockerfile: Dockerfile
+    networks:
+      - db
+    ports:
+      - "9043:9042"
+      - "7180:7199"
+      - "7001:7000"
+  cassandra_second:
+    build:
+      context: .
+      args:
+        - node1=${NODE2}
+        - node2=${NODE1}
+        - node3=${NODE3}
+      dockerfile: Dockerfile
+    networks:
+      - db
+    ports:
+      - "9044:9042"
+      - "7181:7199"
+      - "7002:7000"
+  cassandra_third:
+    build:
+      context: .
+      args:
+        - node1=${NODE3}
+        - node2=${NODE2}
+        - node3=${NODE1}
+      dockerfile: Dockerfile
+    networks:
+      - db
+    ports:
+      - "9045:9042"
+      - "7182:7199"
+      - "7003:7000"
+# if network/subnet already exist u can remove or set new subnet and update file .env
+# to remove network execute $ sudo docker network rm <network_id>
+# to see available networks execute $ sudo docker network ls 
+networks:
+  db:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.19.0.0/24
