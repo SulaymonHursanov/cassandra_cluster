@@ -27,7 +27,11 @@ public class CassandraConnectionTest {
 
         cluster = builder.build();
         session = cluster.connect();
-//        session.execute("select * from test.test");
+//        session.execute("select * from airline.timetable");
+    }
+
+    public Session getSession() {
+        return session;
     }
 
     @After
