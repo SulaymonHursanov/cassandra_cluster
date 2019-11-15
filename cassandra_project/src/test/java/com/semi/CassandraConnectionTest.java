@@ -14,7 +14,7 @@ public class CassandraConnectionTest {
 
     @Test
     public void connectToNode () {
-        String NODE = "127.0.0.1";
+        String NODE = "54.209.247.105";
         int port = 9042;
         connect(NODE, port);
     }

@@ -43,7 +43,7 @@ public class CassandraWriteDataTest {
                 .append("');");
 
         String query = sb.toString();
-        System.out.println(query);
+//        System.out.println(query);
         session.execute(query);
     }
 
